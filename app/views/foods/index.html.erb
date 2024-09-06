@@ -1,0 +1,14 @@
+<h1>Food Results</h1>
+
+<p>Total number of items: <%= @total_results %></p>
+
+	<ul class="All-Foods">
+		<% @all_foods.each do |food| %>
+		    <li class="Food-Item">
+				<p>GTIN/UPC:</p>
+				<p>Description:</p>
+				<p>Brand Owner:</p>
+				<p>Ingredients:</p>
+			</li>
+		<% end %>
+	</ul>

@@ -17,30 +17,41 @@ require "rails_helper"
 
 describe "Search functions" do
   it "should show a search to look for ingredients" do
-
-    fill_in "Ingredient Search", with: "sweet potatoes"
+    visit root_path
+    fill_in :q, with: "sweet potatoes"
     click_button "Search"
 
-    expect(current_path).to eq(food_path)
-  end
-
-  it "should show a count of the number of items returned by the search" do
-
+    expect(current_path).to eq("/foods")
     expect(page).to have_content("Total number of items:")
-  end
+    expect(page).to have_css("li.Food-Item", count: 10)
 
-  it "should show a max of 10 food items" do
-
-    expect(page).to have_css("Foods with", count: 10)
-  end
-
-  it "should show the GTIN/UPC code, the description, the brand owner, and the ingredients" do
-
-    within("food attributes") do
+    within("ul.All-Foods") do
       expect(page).to have_content("GTIN/UPC:")
       expect(page).to have_content("Description:")
       expect(page).to have_content("Brand Owner:")
       expect(page).to have_content("Ingredients:")
     end
   end
+
+  # it "should show a count of the number of items returned by the search" do
+  #   visit root_path
+  #   fill_in "Search", with: "sweet potatoes"
+  #   click_button "Search"
+
+  # end
+
+  # it "should show a max of 10 food items" do
+  #   visit root_path
+  #   fill_in "Search", with: "sweet potatoes"
+  #   click_button "Search"
+
+  # end
+
+  # it "should show the GTIN/UPC code, the description, the brand owner, and the ingredients" do
+  #   visit root_path
+  #   fill_in "Search", with: "sweet potatoes"
+  #   click_button "Search"
+
+  #   end
+  # end
 end
